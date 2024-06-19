@@ -17,6 +17,13 @@ class AuthProvider with ChangeNotifier{
     notifyListeners();
   }
 
+   Stream<QuerySnapshot> getUser(String query) {
+    return _firestore
+        .collection('users')
+        .where('email', isLessThanOrEqualTo: query + '\uf8ff')
+        .snapshots();
+  }
+
   // Future<void> singUp(String email, String password, String name, String imageUrl) async {
   //   UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
   //   final imageurl = await _uploadImage(_image!);

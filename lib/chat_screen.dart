@@ -47,7 +47,6 @@ class _ChatScreenState extends State<ChatScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final receiverData = snapshot.data!.data() as Map<String, dynamic>;
-
             return Scaffold(
               backgroundColor: Color(0xFFEEEEEE),
               appBar: AppBar(
@@ -142,7 +141,7 @@ class MessageStream extends StatelessWidget {
           print(messageData["messageBody"]);
           final messageText = messageData["messageBody"];
           final messageSender = messageData["senderId"];
-          final Timestamp =
+          final timestamp =
               messageData["timestamp"] ?? FieldValue.serverTimestamp();
 
           final currentUser = FirebaseAuth.instance.currentUser!.uid;
@@ -151,6 +150,7 @@ class MessageStream extends StatelessWidget {
             sender: messageSender,
             text: messageText,
             isMe: currentUser == messageSender,
+            timestamp: timestamp,
           );
 
           messageWidgets.add(messageWidget);
@@ -217,7 +217,22 @@ class MessageBubble extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text),
+                      Text(
+                        text,
+                        style: TextStyle(
+                          color: isMe ? Colors.white : Colors.black54,
+                          fontSize: 15
+                        ),
+                      ),
+                      SizedBox(height:5),
+                      Text(
+                        '${messageTime.hour}:${messageTime.minute}',
+                        style: TextStyle(
+                          color: isMe ? Colors.white : Colors.black54,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
                     ],
                   )))
         ],

@@ -1,6 +1,7 @@
 import 'package:chatflutter/chat_provider.dart';
 import 'package:chatflutter/chat_title.dart';
 import 'package:chatflutter/login_screen.dart';
+import 'package:chatflutter/navbar_tile.dart';
 import 'package:chatflutter/search_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
       canPop: false,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(title: const Text("Mensajes"), actions: [
-          
+        appBar: AppBar(title: const Text("Mensajes"),
+        actions: [
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
@@ -71,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           )
         ]),
+        drawer: Navbar(),
         body: Column(
           children: [
             Expanded(
