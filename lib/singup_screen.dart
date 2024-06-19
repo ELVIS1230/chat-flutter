@@ -65,7 +65,8 @@ class _SingUpScreenState extends State<SingUpScreen> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginScreen()));
     } catch (e) {
-      print(e);
+      Fluttertoast.showToast(msg: '${e}');
+      
     }
   }
 
